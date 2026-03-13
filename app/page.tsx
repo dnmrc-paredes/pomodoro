@@ -1,4 +1,4 @@
-import { Timer } from '@/components/timer/Timer'
+import { Timer } from '@/components/Timer/Timer'
 
 export default function Home() {
   return (
