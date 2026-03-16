@@ -7,7 +7,7 @@ import {
 import { Field, FieldLabel } from '@/components/ui/field'
 import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import { Mode } from '@/types/types'
 import { mode } from '@/constants/contants'
 
@@ -18,17 +18,21 @@ type AllModes = {
 }
 
 type TimerSettingsProps = {
-  timeLeft: AllModes
   setTimeLeft: Dispatch<SetStateAction<AllModes>>
 }
 
 export const TimerSettings = ({
   setTimeLeft,
-  timeLeft,
 }: TimerSettingsProps) => {
+  const [timerInput, setTimerInput] = useState({
+    focus: 60,
+    'short-break': 5,
+    'long-break': 15,
+  })
+
   const handleChange = (mode: Mode) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value)
-    setTimeLeft((prev) => ({
+    setTimerInput((prev) => ({
       ...prev,
       [mode]: Number.isNaN(value) ? 0 : value,
     }))
@@ -36,21 +40,23 @@ export const TimerSettings = ({
 
   const saveChanges = () => {
     setTimeLeft({
-      focus: timeLeft.focus * 60,
-      'short-break': timeLeft[mode.SHORT_BREAK] * 60,
-      'long-break': timeLeft[mode.LONG_BREAK] * 60,
+      focus: timerInput.focus * 60,
+      'short-break': timerInput[mode.SHORT_BREAK] * 60,
+      'long-break': timerInput[mode.LONG_BREAK] * 60,
     })
   }
 
   return (
     <Popover>
-      <PopoverTrigger>
-        <Settings
-          color="white"
-          strokeWidth={1}
-          size={18}
-          className="h-10 w-10 cursor-pointer absolute top-10 right-10"
-        />
+      <PopoverTrigger asChild>
+        <button className="absolute top-10 right-10" type="button">
+          <Settings
+            color="white"
+            strokeWidth={1}
+            size={18}
+            className="h-10 w-10 cursor-pointer"
+          />
+        </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80">
         <div className="grid gap-4">
@@ -61,7 +67,7 @@ export const TimerSettings = ({
               <Field>
                 <FieldLabel htmlFor="focus-for">Focus for</FieldLabel>
                 <Input
-                  value={timeLeft.focus}
+                  value={timerInput.focus}
                   onChange={handleChange(mode.FOCUS)}
                   name="focus-for"
                   id="focus-for"
@@ -69,9 +75,9 @@ export const TimerSettings = ({
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="focus-for">Short</FieldLabel>
+                <FieldLabel htmlFor="short-break">Short</FieldLabel>
                 <Input
-                  value={timeLeft[mode.SHORT_BREAK]}
+                  value={timerInput[mode.SHORT_BREAK]}
                   onChange={handleChange(mode.SHORT_BREAK)}
                   name="short-break"
                   id="short-break"
@@ -79,9 +85,9 @@ export const TimerSettings = ({
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="focus-for">Long</FieldLabel>
+                <FieldLabel htmlFor="long-break">Long</FieldLabel>
                 <Input
-                  value={timeLeft[mode.LONG_BREAK]}
+                  value={timerInput[mode.LONG_BREAK]}
                   onChange={handleChange(mode.LONG_BREAK)}
                   name="long-break"
                   id="long-break"
