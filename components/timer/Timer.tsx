@@ -47,9 +47,9 @@ export const Timer = () => {
   }
 
   return (
-    <div className="h-screen w-full bg-black flex items-center justify-center flex-col gap-6">
+    <div className="h-screen w-full flex items-center justify-center flex-col gap-6">
       <Modes currentMode={currentMode} setCurrentMode={setCurrentMode} />
-      <TimerSettings setTimeLeft={setTimeLeft} timeLeft={timeLeft} />
+      <TimerSettings setTimeLeft={setTimeLeft} />
       <div
         className="flex justify-center items-center flex-col h-110 w-110 rounded-full px-4 py-2 bg-white/5 border-4 border-white/10"
         onClick={handleTimer}
