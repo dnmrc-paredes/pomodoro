@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Dispatch, SetStateAction } from 'react'
 import { Mode } from '@/types/types'
-import { mode } from '@/constants/contants'
+import { mode } from '@/constants/mode'
 
 type ModesProps = {
   currentMode: Mode

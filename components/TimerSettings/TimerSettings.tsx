@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { Input } from '@/components/ui/input'
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import { Mode } from '@/types/types'
-import { mode } from '@/constants/contants'
+import { mode } from '@/constants/mode'
 
 type AllModes = {
   focus: number
@@ -21,9 +21,7 @@ type TimerSettingsProps = {
   setTimeLeft: Dispatch<SetStateAction<AllModes>>
 }
 
-export const TimerSettings = ({
-  setTimeLeft,
-}: TimerSettingsProps) => {
+export const TimerSettings = ({ setTimeLeft }: TimerSettingsProps) => {
   const [timerInput, setTimerInput] = useState({
     focus: 60,
     'short-break': 5,
@@ -49,14 +47,16 @@ export const TimerSettings = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="absolute top-10 right-10" type="button">
-          <Settings
-            color="white"
-            strokeWidth={1}
-            size={18}
-            className="h-10 w-10 cursor-pointer"
-          />
-        </button>
+        <div className="flex flex-col items-end w-full max-w-7xl px-6">
+          <button type="button">
+            <Settings
+              color="white"
+              strokeWidth={1}
+              size={18}
+              className="h-10 w-10 cursor-pointer"
+            />
+          </button>
+        </div>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80">
         <div className="grid gap-4">
