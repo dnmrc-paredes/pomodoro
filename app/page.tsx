@@ -3,7 +3,7 @@ import { TaskList } from '@/components/Todo/TaskList'
 
 export default function Home() {
   return (
-    <div className="bg-black">
+    <div>
       <Timer />
       <TaskList />
     </div>

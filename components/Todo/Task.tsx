@@ -20,7 +20,7 @@ export const Task = () => {
         <NotepadText color="white" />
       </ItemMedia>
       <ItemContent>
-        <ItemTitle className="text-white">Task 1 {String(isHovered)}</ItemTitle>
+        <ItemTitle className="text-white">Task 1</ItemTitle>
         <ItemDescription>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem
           deleniti error nobis totam modi ullam accusantium possimus, porro

@@ -1,4 +1,4 @@
-import { Mode } from "@/types/types"
+import { Mode } from '@/types/types'
 
 export const mode = {
   FOCUS: 'focus' as Mode,

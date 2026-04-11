@@ -6,9 +6,9 @@ export const TaskList = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center px-4">
-      <div className="max-w-162.5 flex flex-col gap-10">
+      <div className="flex flex-col gap-10">
         <TaskInput />
-        <ul className="flex flex-col items-center justify-center gap-4">
+        <ul className="flex flex-col items-center justify-center gap-4 max-w-150">
           {tasks.map((task) => (
             <li className="w-full" key={task}>
               <Task key={task} />
