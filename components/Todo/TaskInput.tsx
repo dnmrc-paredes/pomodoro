@@ -4,6 +4,8 @@ import { PlusSquare } from 'lucide-react'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { FieldLabel } from '../ui/field'
+import { addTask } from '@/actions/tasks'
+import { toast } from 'sonner'
 
 export const TaskInput = () => {
   const [input, setInput] = useState('')
@@ -11,8 +13,20 @@ export const TaskInput = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setInput(e.target.value)
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!input.trim()) return
+
+    try {
+      await addTask(input)
+
+      toast.success('Task added successfully.')
+      setInput('')
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.')
+      console.error('Error adding task:', error)
+    }
   }
 
   return (

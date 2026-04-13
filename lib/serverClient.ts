@@ -32,8 +32,9 @@ export const serverClient = async () => {
   )
 }
 
-export async function getServerSession(): Promise<{ session: Session | null }> {
+export async function getServerSession() {
   const supabase = await serverClient()
+  const user = await supabase.auth.getUser()
 
   const {
     data: { session },
@@ -41,5 +42,5 @@ export async function getServerSession(): Promise<{ session: Session | null }> {
     data: { session: Session | null }
   }
 
-  return { session }
+  return { session, user }
 }
